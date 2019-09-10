@@ -1,0 +1,1 @@
+region="ap-southeaset-1"
