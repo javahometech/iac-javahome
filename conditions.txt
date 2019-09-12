@@ -1,0 +1,15 @@
+
+locals {
+  if_prod = "${terraform.workspace == "prod" ? 1 : 0}"
+}
+
+resource "aws_s3_bucket" "b" {
+  count  = "${local.if_prod}"
+  bucket = "${terraform.workspace}-javahome-1234"
+  acl    = "private"
+
+  tags = {
+    Name        = "prod-javahome-1234"
+    Environment = "${terraform.workspace}"
+  }
+}

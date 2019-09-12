@@ -22,7 +22,7 @@ resource "aws_route_table" "public_route" {
 }
 
 resource "aws_route_table_association" "a" {
-    count = "${local.az_count}" 
-    subnet_id      = "${local.pub_sub_ids[count.index]}"
-    route_table_id = "${aws_route_table.public_route.id}"
+  count          = "${local.az_count}"
+  subnet_id      = "${local.pub_sub_ids[count.index]}"
+  route_table_id = "${aws_route_table.public_route.id}"
 }
