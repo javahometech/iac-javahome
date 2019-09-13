@@ -15,7 +15,14 @@ terraform {
 
 module "networking" {
   source           = "./modules/networking"
-  instance_tenancy = "dedicated"
+  instance_tenancy = "default"
   vpc_cidr         = "173.21.0.0/16"
+}
+
+module "web_app" {
+  source = "./modules/ec2"
+  vm_count = 3
+  subnet_ids = "${module.networking.pub_sub_ids}"
+  security_group_ids = ["${aws_security_group.web.id}"]
 }
 
